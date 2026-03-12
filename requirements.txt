@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+snowflake-connector-python
+snowflake-sqlalchemy
+sqlalchemy
+pandas
+requests
+beautifulsoup4
+boto3
+python-dotenv
+streamlit
+dbt-snowflake
+apache-airflow

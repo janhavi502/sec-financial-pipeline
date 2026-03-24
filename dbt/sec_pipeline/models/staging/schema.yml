@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_sub
+    description: "Cleaned and typed SEC submission data"
+    columns:
+      - name: filing_id
+        description: "Unique filing accession number"
+        tests:
+          - not_null
+          - unique
+      - name: cik
+        description: "Company identifier"
+        tests:
+          - not_null
+      - name: form_type
+        description: "SEC form type"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['10-K', '10-Q', '20-F', '40-F', '10-KT', '10-QT',
+                       '10-K/A', '10-Q/A', '20-F/A', '10-KSB', '10-QSB',
+                       'NT 10-K', 'NT 10-Q', '10-KSB/A', '10-QSB/A',
+                       '424B3', '424B4', '6-K', '6-K/A', '8-K', '8-K/A',
+                       'F-1', 'F-1/A', 'F-4', 'F-4/A', 'S-1', 'S-1/A',
+                       'S-4', 'S-4/A', 'S-11/A', 'POS AM', 'POS AMI',
+                       '40-F/A', '10-12G/A']
+              config:
+                severity: warn
+
+  - name: stg_num
+    description: "Cleaned and typed SEC numeric financial data"
+    columns:
+      - name: filing_id
+        description: "Links to stg_sub filing_id"
+        tests:
+          - not_null
+      - name: xbrl_tag
+        description: "XBRL financial tag"
+        tests:
+          - not_null
+      - name: numeric_value
+        description: "Financial value"
+        tests:
+          - not_null
